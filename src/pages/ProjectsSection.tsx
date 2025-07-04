@@ -1,55 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import { useKeenSlider } from 'keen-slider/react';
+import { Link } from 'react-router-dom';
+import 'keen-slider/keen-slider.min.css';
 
 export interface Project {
-  id: string;
+  id: number;
   title: string;
   description: string;
-  imageUrl: string;
+  image_url: string;
   link?: string;
 }
 
 export function ProjectsSection() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
-  // Simulação de fetch (substituir pelo fetch real da sua API)
+  const [sliderRef] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    slides: {
+      perView: 1,
+      spacing: 16,
+    },
+    breakpoints: {
+      '(min-width: 640px)': {
+        slides: { perView: 2, spacing: 16 },
+      },
+      '(min-width: 1024px)': {
+        slides: { perView: 3, spacing: 24 },
+      },
+      '(min-width: 1280px)': {
+        slides: { perView: 4, spacing: 32 },
+      },
+    },
+  });
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        // Aqui você faria um fetch real, por exemplo:
-        // const response = await fetch('https://suaapi.com/projects');
-        // const data = await response.json();
-        const data: Project[] = [
-          {
-            id: '1',
-            title: 'Simulador de Operações Offshore',
-            description: 'Projeto de Realidade Virtual',
-            imageUrl: 'https://images.unsplash.com/photo-1592478411213-6153e4ebc07d',
-            link: '#',
-          },
-          {
-            id: '2',
-            title: 'Visualização de Dados em RA',
-            description: 'Projeto de Realidade Aumentada',
-            imageUrl: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac',
-            link: '#',
-          },
-          {
-            id: '3',
-            title: 'Modelagem 3D com Blender',
-            description: 'Modelagem para ambientes virtuais',
-            imageUrl: 'https://images.unsplash.com/photo-1617791160505-6f00504e3519',
-            link: '#',
-          },
-          {
-            id: '4',
-            title: 'Desenvolvimento de IA e Digital Twin',
-            description: 'Integração de IA com gêmeos digitais',
-            imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
-            link: '#',
-          },
-        ];
-
+        const response = await fetch('http://localhost:8000/api/projects');
+        const data = await response.json();
         setProjects(data);
       } catch (error) {
         console.error('Erro ao buscar projetos:', error);
@@ -64,37 +53,40 @@ export function ProjectsSection() {
   return (
     <section className="py-16 bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:text-center">
-          <p className="mt-2 text-4xl leading-8 font-extrabold tracking-tight text-white sm:text-5xl">
+        <div className="lg:text-center mb-12">
+          <p className="text-4xl font-extrabold text-white sm:text-5xl">
             Projetos
           </p>
         </div>
 
         {loading ? (
-          <p className="text-white text-center mt-8">Carregando...</p>
+          <p className="text-white text-center">Carregando...</p>
         ) : (
-          <div className="mt-12">
-            <div className="space-y-12 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-10 md:gap-y-12">
-              {projects.map((project) => (
-                <div key={project.id} className="relative group">
-                  <div className="relative h-80 w-full overflow-hidden rounded-lg bg-gray-800 group-hover:opacity-75 sm:h-80">
-                    <img
-                      src={project.imageUrl}
-                      alt={project.title}
-                      className="h-full w-full object-cover object-center transform transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <h3 className="mt-6 text-sm text-gray-400">
-                    <a href={project.link || '#'} className="hover:underline">
-                      Projeto
-                    </a>
-                  </h3>
-                  <p className="text-lg font-semibold text-white">{project.title}</p>
-                  <p className="text-gray-400">{project.description}</p>
-                </div>
-              ))}
+        <div ref={sliderRef} className="keen-slider">
+          {projects.map((project) => (
+            <div
+              key={project.id}
+              className="keen-slider__slide bg-gray-800 rounded-xl overflow-hidden shadow-lg transform transition-all hover:scale-105"
+            >
+              <img
+                src={project.image_url}
+                alt={project.title}
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-white text-lg font-bold">{project.title}</h3>
+                <p className="text-gray-400 text-sm">{project.description}</p>
+
+                <Link
+                  to={`/projects/${project.id}`}
+                  className="text-blue-500 hover:underline text-sm mt-2 inline-block"
+                >
+                  Ver mais
+                </Link>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
         )}
       </div>
     </section>

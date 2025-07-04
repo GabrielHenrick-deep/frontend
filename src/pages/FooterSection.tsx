@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Glasses, Search, Menu, User, Calendar, Clock, ArrowRight, X, Youtube, Mail, Facebook, Twitter, Instagram, Phone, MapPin, Brain, GraduationCap, Globe2 } from 'lucide-react'
+import { Glasses, Search, Menu, User, Calendar, Clock, ArrowRight, X, Youtube, Mail, Facebook, Twitter, Instagram, Phone, MapPin, Brain, GraduationCap, Globe2, Linkedin, LinkedinIcon } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -62,16 +62,16 @@ export function FooterSection() {
                     <div className="flex flex-col space-y-4">
                       {/* Redes Sociais */}
                       <div className="flex space-x-4">
-                        <a href="#" className="text-white hover:text-white transition">
+                        <a href="https://www.youtube.com/@grvaufu" className="text-white hover:text-white transition">
                           <Youtube className="h-6 w-6" />
                         </a>
-                        <a href="#" className="text-white hover:text-white transition">
-                          <Facebook className="h-6 w-6" />
+                        <a href="https://www.linkedin.com/company/grva-ufu/posts/?feedView=all" className="text-white hover:text-white transition">
+                          <LinkedinIcon className="h-6 w-6" />
                         </a>
-                        <a href="#" className="text-white hover:text-white transition">
+                        {/* <a href="#" className="text-white hover:text-white transition">
                           <Twitter className="h-6 w-6" />
-                        </a>
-                        <a href="#" className="text-white hover:text-white transition">
+                        </a> */}
+                        <a href="https://www.instagram.com/grvaufu/" className="text-white hover:text-white transition">
                           <Instagram className="h-6 w-6" />
                         </a>
                       </div>
