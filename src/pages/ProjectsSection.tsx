@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import { Link } from 'react-router-dom';
 import 'keen-slider/keen-slider.min.css';
+import {api} from '../lib/api';
 
 export interface Project {
   id: number;
@@ -14,7 +15,7 @@ export interface Project {
 export function ProjectsSection() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const [error, setError] = useState<string | null>(null);
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: {
@@ -34,21 +35,20 @@ export function ProjectsSection() {
     },
   });
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/projects');
-        const data = await response.json();
-        setProjects(data);
-      } catch (error) {
-        console.error('Erro ao buscar projetos:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+      useEffect(() => {
+              async function fetchProjects() {
+                      try {
+                              const response = await api.get('/projects');
+                              setProjects(response.data);
+                      } catch (err) {
+                              setError('Erro ao carregar projetos.');
+                      } finally {
+                              setLoading(false);
+                      }
+              }
 
-    fetchProjects();
-  }, []);
+              fetchProjects();
+      }, []);
 
   return (
     <section className="py-16 bg-gray-900">

@@ -3,14 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import ReactPlayer from 'react-player';
-export interface Project {
-  id: number;
-  title: string;
-  resumo: string;
-  image_url: string;
-  video: string;
-  artigo: string[];
-}
+import {Project} from '../types/projects';
 
 const ProjectProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -13,7 +13,7 @@ export function FooterSection() {
                 {/* Logo and Copyright - EXTREMO ESQUERDO */}
                 <div className="flex flex-col items-start w-full">
                   <div className="mb-4 self-start">
-                    <img src="img/LogoGRVA_secundaria_fundo_escuro_desc.svg" className="h-20 w-auto" alt="Logo GRVA" />
+                    <img src="http://localhost:8000/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg" className="h-20 w-auto" alt="Logo GRVA" />
                   </div>
                 </div>
       
