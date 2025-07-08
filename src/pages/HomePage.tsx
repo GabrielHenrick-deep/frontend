@@ -11,50 +11,36 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { api } from '../lib/api';
 import { Plus, Trash2,  Image as ImageIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-type ImageItem = {
-  id: number;
-  title: string;
-  url: string;
-  description: string;
-  order: number;
-};
+import {Publication} from '../types/publications';
+
 
 export function HomePage() {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = React.useState('home');
-  const [images, setImages] = useState<ImageItem[]>([]);
+  const [publication, setPublications] = useState<Publication[]>([]);
+  const [loading, setLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [editingImage, setEditingImage] = useState<ImageItem | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [formData, setFormData] = useState<Omit<ImageItem, 'id'>>({
-    title: '',
-    url: '',
-    description: '',
-    order: 1,
-  });    
+  const [error, setError] = useState<string | null>(null);
+   
 
       // ✅ Carregar imagens da API
-      const fetchImages = async () => {
-        try {
-          const response = await api.get<ImageItem[]>('/carousel-images');
-          setImages(response.data);
-        } catch (error) {
-          console.error('Error fetching images:', error);
-        }
-      };
-    
       useEffect(() => {
-        fetchImages();
+        async function fetchPublication() {
+          try {
+            const response = await api.get('/publications');
+            setPublications(response.data);
+          } catch (err) {
+            console.error('Erro ao buscar Uploads:', err);
+            setError('Erro ao carregar Uploads. ');
+          } finally{
+            setLoading(false);
+          }
+        }
+        fetchPublication();
       }, []);
-    
-      // 🔍 Filtrar e ordenar
-      const filteredImages = images.filter(
-        (img) =>
-          img.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          img.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
   const renderPage = () => {
     switch (currentPage) {
        
@@ -82,9 +68,9 @@ export function HomePage() {
                 fade={true}
                 className="absolute inset-0 w-full h-full"
               >
-                {images.map((img, index) => (
+                {publication.map((img, index) => (
               <div key={index} className="w-full h-[600px] flex justify-center items-center">
-                <img src={img.url} alt={`Slide ${index}`} className="w-full h-full object-cover" />
+                <img src={img.image_url} alt={`Slide ${index}`} className="w-full h-full object-cover" />
               </div>
             ))}
               </Slider>

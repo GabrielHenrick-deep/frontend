@@ -70,14 +70,14 @@ export function Header() {
           {/* Right Links */}
           <div className="flex space-x-8">
             <Link
-              to="/about"
+              to="/contact"
               className={`${
-                isActive('/about')
+                isActive('/contact')
                   ? 'text-white border-b-2 border-blue-600'
                   : 'text-white hover:text-gray-300'
               } px-1 py-2 text-base font-medium`}
             >
-              Sobre
+              Contato
             </Link>
             <Link
               to="/blog"

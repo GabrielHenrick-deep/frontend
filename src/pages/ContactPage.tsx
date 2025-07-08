@@ -52,10 +52,10 @@ export function ContactPage() {
               <div>
                 <p className="text-sm text-gray-400">Email</p>
                 <a 
-                  href="mailto:contato@labresearch.com" 
+                  href="mailto:grvaufu@gmail.com" 
                   className="text-white hover:text-blue-600 transition-colors"
                 >
-                  contato@labresearch.com
+                  grvaufu@gmail.com
                 </a>
               </div>
             </div>

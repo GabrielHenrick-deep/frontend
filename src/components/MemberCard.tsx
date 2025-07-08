@@ -1,9 +1,9 @@
 import React from 'react';
-import { Members } from '../types/members';
+import { Member } from '../types/members';
 import { useNavigate } from 'react-router-dom';
 
 interface MemberCardProps {
-  member: Members;
+  member: Member;
 }
 
 export function MemberCard({ member }: MemberCardProps) {
@@ -15,7 +15,7 @@ export function MemberCard({ member }: MemberCardProps) {
       className="bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform hover:scale-105"
     >
       <img 
-        src={member.image} 
+        src={member.foto} 
         alt={member.name}
         className="w-full h-48 object-cover"
       />

@@ -163,7 +163,6 @@ export function AboutPage() {
             </div>
           </div>
         </div>
-        <ContactPage/>
       </div>
     </div>
   );

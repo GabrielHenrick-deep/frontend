@@ -5,7 +5,7 @@ import { MemberCard } from '../components/MemberCard';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { Member, MemberCategory } from '../types/members';
 
-const categories: MemberCategory[] = ['Graduação', 'Mestrado', 'Doutorado', 'Pós-Doutorado'];
+const categories: MemberCategory[] = ['Mestrando(a)' , 'Doutorando(a)' , 'Pós-Doutorando(a)' , 'Iniciação Científica'];
 
 export function MembersPage() {
   const { id } = useParams();
@@ -13,7 +13,7 @@ export function MembersPage() {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [member, setMember] = useState<Member | null>(null);
-  const [projectData, setMembersData] = useState(null);
+  const [projectData] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState<'all' | MemberCategory>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
 

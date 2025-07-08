@@ -1,17 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
-
-interface Blog {
-  id: number;
-  title: string;
-  slug: string;
-  image: string;
-  category: string;
-  author: string;
-  excerpt: string;
-  date: string;
-}
+import {Blog} from '../types/blogs';
 
 export function BlogPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -24,43 +14,43 @@ export function BlogPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a1720] via-[#1a2636] to-[#18191a] text-gray-200 px-4 py-12">
-      <h1 className="text-4xl sm:text-5xl font-bold mb-10 text-center tracking-tight text-gray-200">
-        <span className="bg-gradient-to-r from-cyan-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
-          Blog LabResearch
-        </span>
+    <div className="min-h-screen bg-gray-900 text-gray-100 px-4 py-12">
+      <h1 className="text-4xl sm:text-5xl font-extrabold mb-12 text-center text-gray-100">
+        Publicações
       </h1>
 
-      <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <div className="max-w-4xl mx-auto space-y-10">
         {blogs.map((article) => (
           <div
             key={article.id}
-            className="relative bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-2xl hover:shadow-blue-900/40 transition-all cursor-pointer overflow-hidden border border-gray-800 hover:border-cyan-900 group"
-            onClick={() => navigate(`/blog/${article.slug}`)}
-          >
-            <div className="relative">
-              <img
-                src={article.image}
-                alt={article.title}
-                className="w-full h-56 object-cover object-center transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              <span className="absolute top-4 left-4 bg-cyan-950/90 text-cyan-200 px-3 py-1 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm">
-                {article.category}
-              </span>
-            </div>
-            <div className="p-7 flex flex-col gap-4">
-              <div className="flex items-center justify-between text-xs text-gray-400">
-                <span>{new Date(article.date).toLocaleDateString('pt-BR')}</span>
-                <span className="flex items-center gap-2">
-                  <span className="inline-block w-2 h-2 bg-cyan-900 rounded-full"></span>
-                  {article.author}
-                </span>
+            className="flex flex-col md:flex-row bg-gray-800 border border-gray-700 rounded-2xl shadow hover:shadow-lg transition-all duration-200 cursor-pointer group"
+            // onClick={() => navigate(`/blog/${article.link}`)}
+              onClick={e => { e.stopPropagation();
+                window.open(article.link, '_blank');
+              }}
+            >
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full md:w-64 h-52 object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none group-hover:scale-105 transition-transform duration-200"
+            />
+            <div className="p-7 flex flex-col justify-between flex-1">
+              <div className="mb-4">
+                <div className="text-xs text-gray-400 mb-2 flex items-center gap-2">
+                  <span className="inline-block px-2 py-0.5 bg-gray-700 rounded-full font-semibold uppercase tracking-wide">
+                    {article.category}
+                  </span>
+                  <span className="text-gray-600">·</span>
+                  <span>{new Date(article.date).toLocaleDateString('pt-BR')}</span>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-100 group-hover:text-gray-300 transition-colors">
+                  {article.title}
+                </h2>
+                <p className="text-gray-300 mt-3 line-clamp-3">{article.excerpt}</p>
               </div>
-              <h2 className="text-2xl font-bold text-gray-100 group-hover:text-cyan-300 transition-colors">
-                {article.title}
-              </h2>
-              <p className="text-gray-400 line-clamp-3">{article.excerpt}</p>
+              <div className="text-sm text-gray-400 mt-4">
+                <span className="font-medium">Por {article.author}</span>
+              </div>
             </div>
           </div>
         ))}

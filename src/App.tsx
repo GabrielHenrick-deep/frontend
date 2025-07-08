@@ -11,6 +11,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import ProjectsProfile from './pages/ProjectProfile';
 import { BlogPage } from './pages/BlogPage';
 import { BlogPost } from './pages/BlogPost';
+import { AdminDashboard } from './components/AdminDashboard';
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
             <Route path="/member/:id" element={<MemberProfile />} />
             <Route path="/projects/:id" element={<ProjectsProfile />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>

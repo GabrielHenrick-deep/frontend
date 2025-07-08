@@ -3,7 +3,7 @@ export interface Project {
   title: string;
 }
 
-export type MemberCategory = 'Mestrado' | 'Doutorado' | 'Pós-Doutorado' | 'Graduação';
+export type MemberCategory = 'Mestrando(a)' | 'Doutorando(a)' | 'Pós-Doutorando(a)' | 'Iniciação Científica';
 
 export interface Member {
   id: number;
