@@ -37,22 +37,6 @@ export function FooterSection() {
                       Contato
                     </Link>
                     </li>
-                    <li>
-                    <a 
-                      href="#" 
-                      className="text-white hover:text-gray-300 transition"
-                    >
-                      Política de Privacidade
-                    </a>
-                    </li>
-                    <li>
-                    <a 
-                      href="#" 
-                      className="text-white hover:text-gray-300 transition"
-                    >
-                      Termos de Uso
-                    </a>
-                    </li>
                   </ul>
                   </div>
       

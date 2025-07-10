@@ -12,6 +12,9 @@ import ProjectsProfile from './pages/ProjectProfile';
 import { BlogPage } from './pages/BlogPage';
 import { BlogPost } from './pages/BlogPost';
 import { AdminDashboard } from './components/AdminDashboard';
+import LoginScreen from './components/LoginScreen'
+import { PrivateRoute } from './components/PrivateRoute';
+
 
 function App() {
   return (
@@ -28,7 +31,17 @@ function App() {
             <Route path="/member/:id" element={<MemberProfile />} />
             <Route path="/projects/:id" element={<ProjectsProfile />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/login" element={<LoginScreen />} />
+            {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+            <Route
+              path="/admin"
+              element={
+                <PrivateRoute>
+                  <AdminDashboard />
+                </PrivateRoute>
+              }
+            />
+
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

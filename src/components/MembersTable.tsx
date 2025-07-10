@@ -5,7 +5,7 @@ import { api } from '../lib/api';
 
 type Member = {
   id: number;
-  image: string;
+  foto: string;
   name: string;
   cpf_cnpj: string;
   category: string;
@@ -21,7 +21,7 @@ export const MembersTable: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const [formData, setFormData] = useState({
-    image: '',
+    foto: '',
     name: '',
     cpf_cnpj: '',
     category: '',
@@ -46,8 +46,8 @@ export const MembersTable: React.FC = () => {
   }, []);
 const buildFormData = () => {
   const data = new FormData();
-  if (formData.image) {
-    data.append('image', formData.image);
+  if (formData.foto) {
+    data.append('foto', formData.foto);
   }
   data.append('name', formData.name);
   data.append('cpf_cnpj', formData.cpf_cnpj);
@@ -105,7 +105,7 @@ const updateMember = async () => {
     if (member) {
       setEditingMember(member);
       setFormData({
-        image: member.image,
+        foto: member.foto,
         name: member.name,
         cpf_cnpj: member.cpf_cnpj,
         category: member.category,
@@ -115,7 +115,7 @@ const updateMember = async () => {
     } else {
       setEditingMember(null);
       setFormData({
-        image: '',
+        foto: '',
         name: '',
         cpf_cnpj: '',
         category: '',
@@ -202,7 +202,7 @@ const updateMember = async () => {
           {filteredMembers.map((member) => (
           <tr key={member.id} className="hover:bg-gray-800">
             <td className="px-6 py-4">
-            <img src={member.image} alt={member.name} className="w-10 h-10 rounded object-cover" />
+            <img src={member.foto} alt={member.name} className="w-10 h-10 rounded object-cover" />
             </td>
             <td className="px-6 py-4">
             <div className="text-sm font-medium text-gray-100">{member.name}</div>
@@ -246,8 +246,8 @@ const updateMember = async () => {
         </label>
         <input
           type="text"
-          value={formData.image}
-          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+          value={formData.foto}
+          onChange={(e) => setFormData({ ...formData, foto: e.target.value })}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-800 text-gray-100 placeholder-gray-400"
           placeholder=" "
           required

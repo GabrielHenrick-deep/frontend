@@ -5,7 +5,8 @@ import { MembersTable } from './MembersTable';
 import { ProjectTable } from './ProjectTable';
 import { ImageManager } from './ImageManager';
 import { TabType } from '../types';
-
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../api/logout';
 
 export const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('members');
@@ -16,13 +17,13 @@ export const AdminDashboard: React.FC = () => {
     .then(data => setProjectsData(data))
     .catch(error => console.error('Erro:', error))
   }, []);
-  const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      // In a real app, this would handle authentication logout
-      alert('Logout functionality would be implemented here');
-    }
-  };
+ 
+  const navigate = useNavigate();
 
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
   const renderActiveTab = () => {
     switch (activeTab) {
       case 'members':
@@ -45,7 +46,7 @@ export const AdminDashboard: React.FC = () => {
             <div className="flex items-center space-x-3">
               <div className="flex items-center justify-center w-8 h-8 bg-gray-900 rounded-lg shadow">
                  <img
-                src="img/LogoGRVA_secundaria_fundo_escuro.svg"
+                src="http://localhost:8000/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg"
                 className="h-20 w-20"
                 alt="Logo"
               />

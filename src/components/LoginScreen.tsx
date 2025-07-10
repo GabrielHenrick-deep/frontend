@@ -13,35 +13,42 @@ export default function LoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try{
-      await axios.get("http://localhost:8000/sanctum/csrf-cookie");
-      await axios.post("http://localhost:8000/login", { email, password });
-      setEmail("");
-      setPassword("");
-      navigate("/admin");
-    }catch(e){
-      console.log(e);
-    }
-  };
-    //   const handleLogin = async () => {
-    //   try {
-    //     await axios.get('/sanctum/csrf-cookie'); // 🔥 Primeiro busca o cookie CSRF
+const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  setIsLoading(true);
+  try {
+    // 1. Pegar cookie CSRF (só necessário se estiver usando login via sessão — não token)
+    await axios.get("http://localhost:8000/sanctum/csrf-cookie", { withCredentials: true });
 
-    //     await axios.post('/login', {
-    //       email: 'email@example.com',
-    //       password: 'sua_senha',
-    //     });
-    //     setEmail("");
-    //     setPassword("");
-    //     navigate("/admin");
-    //     console.log('Login realizado com sucesso!');
-    //     // navegue para a rota desejada
-    //   } catch (error) {
-    //     console.error('Erro no login:', error);
-    //   }
-    // };
+    // 2. Login com email/senha
+    const res = await axios.post("http://localhost:8000/api/login", {
+      email,
+      password,
+    });
+
+    const token = res.data.token;
+    localStorage.setItem('token', token);
+
+    // 3. Buscar dados do usuário autenticado
+    const userRes = await axios.get("http://localhost:8000/api/user", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log("Usuário logado:", userRes.data);
+
+    setEmail("");
+    setPassword("");
+    navigate("/admin");
+  } catch (e: any) {
+    console.error("Erro no login:", e.response?.data || e.message);
+    alert("Email ou senha inválidos");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center p-4">
@@ -116,12 +123,6 @@ export default function LoginScreen() {
                   Lembrar de mim
                 </label>
               </div>
-              <button
-                type="button"
-                className="text-sm text-blue-400 hover:text-blue-300 font-medium transition-colors"
-              >
-                Esqueceu a senha?
-              </button>
             </div>
 
             {/* Login Button */}
