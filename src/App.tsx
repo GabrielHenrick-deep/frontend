@@ -6,11 +6,9 @@ import { HomePage } from './pages/HomePage';
 import { MembersPage } from './pages/MembersPage';
 import { MemberProfile } from './pages/MemberProfile';
 import { ContactPage } from './pages/ContactPage';
-import { AboutPage } from './pages/AboutPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectsProfile from './pages/ProjectProfile';
 import { BlogPage } from './pages/BlogPage';
-import { BlogPost } from './pages/BlogPost';
 import { AdminDashboard } from './components/AdminDashboard';
 import LoginScreen from './components/LoginScreen'
 import { PrivateRoute } from './components/PrivateRoute';
@@ -25,8 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/members" element={<MembersPage />} />
-            <Route path="/blog" element={<BlogPage />} /> 
-            <Route path="/blog/:slug" element={<BlogPost />} />            
+            <Route path="/blog" element={<BlogPage />} />            
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/member/:id" element={<MemberProfile />} />
             <Route path="/projects/:id" element={<ProjectsProfile />} />

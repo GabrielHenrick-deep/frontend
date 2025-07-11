@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { api } from '../lib/api';
 import {Blog} from '../types/blogs';
 
 export function BlogPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     api.get('/blogs')
