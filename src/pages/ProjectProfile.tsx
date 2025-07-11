@@ -5,6 +5,11 @@ import { ArrowLeft, ExternalLink } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { Project } from '../types/projects';
 
+
+function isGoogleDriveUrl(url: string): boolean {
+  return url.includes('drive.google.com');
+}
+
 const ProjectProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -47,7 +52,7 @@ const ProjectProfile: React.FC = () => {
 
       <div className="w-full max-w-5xl bg-gray-900/80 border border-gray-800 rounded-2xl shadow-2xl p-6 md:p-10 space-y-8">
         {/* Imagem (opcional) */}
-        {project.image_url && (
+        {project.image_url?.trim() !== '' && (
           <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden border border-gray-700 bg-gray-800">
             <img
               src={project.image_url}
@@ -69,7 +74,7 @@ const ProjectProfile: React.FC = () => {
         </p>
 
         {/* Vídeo */}
-        {project.video && (
+        {project.video && !isGoogleDriveUrl(project.video) && (
           <div className="rounded-xl overflow-hidden border border-gray-700">
             <ReactPlayer
               src={project.video}
@@ -79,6 +84,7 @@ const ProjectProfile: React.FC = () => {
             />
           </div>
         )}
+
 
         {/* Artigos */}
         {project.artigo && project.artigo.length > 0 && (

@@ -2,16 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Edit, Trash2, Plus, Search } from 'lucide-react';
 import { Modal } from './Modal';
 import { api } from '../lib/api';
-
-type Member = {
-  id: number;
-  foto: string;
-  name: string;
-  cpf_cnpj: string;
-  category: string;
-  email: string;
-  bio: string;
-};
+import { Member } from '../types/members';
 
 export const MembersTable: React.FC = () => {
   const [members, setMembers] = useState<Member[]>([]);
@@ -21,12 +12,10 @@ export const MembersTable: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const [formData, setFormData] = useState({
-    foto: '',
     name: '',
-    cpf_cnpj: '',
+    foto: '',
     category: '',
     email: '',
-    bio: '',
   });
 
   // 🔥 Carregar membros
@@ -50,10 +39,8 @@ const buildFormData = () => {
     data.append('foto', formData.foto);
   }
   data.append('name', formData.name);
-  data.append('cpf_cnpj', formData.cpf_cnpj);
   data.append('category', formData.category);
   data.append('email', formData.email);
-  data.append('bio', formData.bio);
   return data;
 };
 
@@ -107,20 +94,16 @@ const updateMember = async () => {
       setFormData({
         foto: member.foto,
         name: member.name,
-        cpf_cnpj: member.cpf_cnpj,
         category: member.category,
         email: member.email,
-        bio: member.bio,
       });
     } else {
       setEditingMember(null);
       setFormData({
         foto: '',
         name: '',
-        cpf_cnpj: '',
         category: '',
         email: '',
-        bio: '',
       });
     }
     setIsModalOpen(true);
@@ -140,6 +123,37 @@ const updateMember = async () => {
     }
   };
 
+  const [csvFile, setCsvFile] = useState<File | null>(null);
+
+  const handleCsvInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setCsvFile(e.target.files[0]);
+    }
+  };
+
+  const handleCsvUpload = async () => {
+    if (!csvFile) {
+      alert('Selecione um arquivo CSV primeiro.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', csvFile);
+
+    try {
+      await api.post('/import-members', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      alert('CSV importado com sucesso!');
+      fetchMembers(); // Atualiza a tabela
+      setCsvFile(null); // Limpa o estado
+    } catch (err) {
+      console.error('Erro ao importar CSV:', err);
+      alert('Erro ao importar CSV');
+    }
+  };
+
+
   const filteredMembers = members.filter(member =>
     (member.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (member.email || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -148,25 +162,36 @@ const updateMember = async () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
       <div className="relative flex-1 max-w-md">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
         <input
-        type="text"
-        placeholder="Buscar membros..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-800 text-gray-100 placeholder-gray-400"
+          type="text"
+          placeholder="Buscar membros..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-800 text-gray-100 placeholder-gray-400"
         />
       </div>
-      <button
-        onClick={() => handleOpenModal()}
-        className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-      >
-        <Plus size={20} />
-        <span>Adicionar Membro</span>
-      </button>
+
+      {/* Upload de CSV */}
+      <div className="flex items-center space-x-4">
+        <input
+          type="file"
+          accept=".csv"
+          onChange={handleCsvInput}
+          className="text-white"
+        />
+        <button
+          onClick={handleCsvUpload}
+          className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <Plus size={20} />
+          <span>Importar CSV</span>
+        </button>
       </div>
+    </div>
+
 
       {loading ? (
       <div className="text-center text-gray-400">Carregando membros...</div>
@@ -207,10 +232,8 @@ const updateMember = async () => {
             <td className="px-6 py-4">
             <div className="text-sm font-medium text-gray-100">{member.name}</div>
             </td>
-            <td className="px-6 py-4 text-sm text-gray-200">{member.cpf_cnpj}</td>
             <td className="px-6 py-4 text-sm text-gray-200">{member.category}</td>
             <td className="px-6 py-4 text-sm text-gray-200">{member.email}</td>
-            <td className="px-6 py-4 text-sm text-gray-200 max-w-xs truncate">{member.bio}</td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <div className="flex items-center justify-end space-x-2">
               <button
@@ -265,16 +288,6 @@ const updateMember = async () => {
         />
         </div>
         <div>
-        <label className="block text-sm font-medium text-gray-200 mb-1">CPF/CNPJ</label>
-        <input
-          type="text"
-          required
-          value={formData.cpf_cnpj}
-          onChange={(e) => setFormData({ ...formData, cpf_cnpj: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-800 text-gray-100 placeholder-gray-400"
-        />
-        </div>
-        <div>
         <label className="block text-sm font-medium text-gray-200 mb-1">Categoria</label>
         <input
           type="text"
@@ -291,16 +304,6 @@ const updateMember = async () => {
           required
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-800 text-gray-100 placeholder-gray-400"
-        />
-        </div>
-        <div>
-        <label className="block text-sm font-medium text-gray-200 mb-1">Bio</label>
-        <textarea
-          required
-          rows={3}
-          value={formData.bio}
-          onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-800 text-gray-100 placeholder-gray-400"
         />
         </div>
