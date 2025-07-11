@@ -60,34 +60,46 @@ export function ProjectsSection() {
         </div>
 
         {loading ? (
-          <p className="text-white text-center">Carregando...</p>
-        ) : (
-        <div ref={sliderRef} className="keen-slider">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="keen-slider__slide bg-gray-800 rounded-xl overflow-hidden shadow-lg transform transition-all hover:scale-105"
-            >
-              <img
-                src={project.image_url}
-                alt={project.title}
-                className="w-full h-52 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-white text-lg font-bold">{project.title}</h3>
-                <p className="text-gray-400 text-sm">{project.description}</p>
-
-                <Link
-                  to={`/projects/${project.id}`}
-                  className="text-blue-500 hover:underline text-sm mt-2 inline-block"
-                >
-                  Ver mais
-                </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="bg-gray-800 rounded-xl overflow-hidden shadow-lg animate-pulse">
+                <div className="h-52 w-full skeleton"></div>
+                <div className="p-4 space-y-2">
+                  <div className="h-4 w-3/4 skeleton"></div>
+                  <div className="h-3 w-full skeleton"></div>
+                  <div className="h-3 w-1/2 skeleton"></div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div ref={sliderRef} className="keen-slider">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="keen-slider__slide bg-gray-800 rounded-xl overflow-hidden shadow-lg transform transition-all hover:scale-105"
+              >
+                <img
+                  src={project.image_url}
+                  alt={project.title}
+                  className="w-full h-52 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-white text-lg font-bold">{project.title}</h3>
+                  <p className="text-gray-400 text-sm">{project.description}</p>
+
+                  <Link
+                    to={`/projects/${project.id}`}
+                    className="text-blue-500 hover:underline text-sm mt-2 inline-block"
+                  >
+                    Ver mais
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         )}
+
       </div>
     </section>
   );

@@ -96,30 +96,30 @@ export function ContactPage() {
               </div>
             </div>
 
-                          {/* Location Map */}
-                          <div className="flex flex-col items-end w-full">
-                            <iframe
-                            className="w-full max-w-xs sm:max-w-sm md:max-w-md h-48 rounded-lg shadow-lg border-0"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.2748834457443!2d-48.26172178883213!3d-18.919223207557796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94a445b55d53092f%3A0x2704333d3b0c784e!2sGrupo%20de%20Realidade%20Virtual%20e%20Aumentada%20(GRVA%20-%20UFU)!5e0!3m2!1spt-PT!2sbr!4v1743617444211!5m2!1spt-PT!2sbr"
-                            loading="lazy"
-                            allowFullScreen
-                            referrerPolicy="no-referrer-when-downgrade"
-                            title="Localização GRVA"
-                            ></iframe>
-                            <div className="mt-3 text-sm text-gray-300 text-right w-full">
-                            <p>Av. João Naves de Ávila, 212</p>
-                            <p>Uberlândia - MG, 38408-100</p>
-                            </div>
-                          </div>
+            {/* Location Map */}
+            <div className="flex flex-col items-end w-full">
+              <iframe
+              className="w-full max-w-xs sm:max-w-sm md:max-w-md h-48 rounded-lg shadow-lg border-0"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.2748834457443!2d-48.26172178883213!3d-18.919223207557796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94a445b55d53092f%3A0x2704333d3b0c784e!2sGrupo%20de%20Realidade%20Virtual%20e%20Aumentada%20(GRVA%20-%20UFU)!5e0!3m2!1spt-PT!2sbr!4v1743617444211!5m2!1spt-PT!2sbr"
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Localização GRVA"
+              ></iframe>
+              <div className="mt-3 text-sm text-gray-300 text-right w-full">
+              <p>Av. João Naves de Ávila, 212</p>
+              <p>Uberlândia - MG, 38408-100</p>
+              </div>
+            </div>
 
-                          {/* Logo */}
-                          <div className="flex justify-center mt-8">
-                            <img
-                            src="http://localhost:8000/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg"
-                            alt="Logo GRVA"
-                            className="w-40 h-20 object-contain"
-                            />
-                          </div>
+            {/* Logo */}
+            <div className="flex justify-center mt-8">
+              <img
+              src="http://localhost:8000/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg"
+              alt="Logo GRVA"
+              className="w-40 h-20 object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>

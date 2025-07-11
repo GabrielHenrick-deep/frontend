@@ -29,11 +29,6 @@ export function BlogPage() {
                 window.open(article.link, '_blank');
               }}
             >
-            <img
-              src={article.image}
-              alt={article.title}
-              className="w-full md:w-64 h-52 object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none group-hover:scale-105 transition-transform duration-200"
-            />
             <div className="p-7 flex flex-col justify-between flex-1">
               <div className="mb-4">
                 <div className="text-xs text-gray-400 mb-2 flex items-center gap-2">

@@ -103,33 +103,42 @@ export function Research() {
           </p>
         </div>
 
-        {loading ? (
-          <p className="text-white text-center mt-8">Carregando...</p>
-        ) : (
-          <div className="mt-12">
-            <Slider {...settings}>
-              {projects.map((project) => (
-                <div key={project.id} className="px-2">
-                  <div className="relative group">
-                    <div className="relative h-64 w-full overflow-hidden rounded-lg bg-gray-800 group-hover:opacity-75 sm:h-64">
-                      <img
-                        src={project.imageUrl}
-                        alt={project.title}
-                        className="h-full w-full object-cover object-center transform transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                    <h3 className="mt-4 text-sm text-gray-400">
-                      <a href={project.link || '#'} className="hover:underline">
-                        Projeto
-                      </a>
-                    </h3>
-                    <p className="text-lg font-semibold text-white">{project.title}</p>
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
+          {[...Array(4)].map((_, index) => (
+            <div key={index} className="space-y-4 px-2">
+              <div className="relative h-64 w-full skeleton" />
+              <div className="h-4 w-3/4 skeleton" />
+              <div className="h-4 w-full skeleton" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-12">
+          <Slider {...settings}>
+            {projects.map((project) => (
+              <div key={project.id} className="px-2">
+                <div className="relative group">
+                  <div className="relative h-64 w-full overflow-hidden rounded-lg bg-gray-800 group-hover:opacity-75 sm:h-64">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="h-full w-full object-cover object-center transform transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
+                  <h3 className="mt-4 text-sm text-gray-400">
+                    <a href={project.link || '#'} className="hover:underline">
+                      Projeto
+                    </a>
+                  </h3>
+                  <p className="text-lg font-semibold text-white">{project.title}</p>
                 </div>
-              ))}
-            </Slider>
-          </div>
-        )}
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
+
       </div>
     </section>
   );

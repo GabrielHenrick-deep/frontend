@@ -9,5 +9,6 @@ export interface Project {
   resumo: string;
   image_url: string;
   video: string;
-  artigo: string[];
+  members: Member[];
+  artigo: { title: string; url: string }[];
 }

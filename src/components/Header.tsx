@@ -87,7 +87,7 @@ export function Header() {
                   : 'text-white hover:text-gray-300'
               } px-1 py-2 text-base font-medium`}
             >
-              Eventos
+              Publicações
             </Link>
           </div>
         </div>

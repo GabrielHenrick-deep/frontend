@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Edit, Trash2, Plus, Search } from 'lucide-react';
 import { Modal } from './Modal';
 import { api } from '../lib/api';
-
-type Project = {
-  id: number;
-  image_url: string;
-  name_project: string;
-  descri: string;
-  status: string;
-};
+import { Project } from '../types/projects';
 
 export const ProjectTable: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -22,7 +15,6 @@ export const ProjectTable: React.FC = () => {
     image_url: '',
     name_project: '',
     descri: '',
-    status: '',
   });
 
   // 🔥 Carregar projetos
@@ -85,9 +77,8 @@ export const ProjectTable: React.FC = () => {
       setEditingProject(project);
       setFormData({
         image_url: project.image_url,
-        name_project: project.name_project,
-        descri: project.descri,
-        status: project.status,
+        name_project: project.title,
+        descri: project.resumo,
       });
     } else {
       setEditingProject(null);
@@ -95,7 +86,6 @@ export const ProjectTable: React.FC = () => {
         image_url: '',
         name_project: '',
         descri: '',
-        status: '',
       });
     }
     setIsModalOpen(true);
@@ -116,8 +106,8 @@ export const ProjectTable: React.FC = () => {
   };
 
   const filteredProjects = projects.filter(project =>
-  (project.name_project || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-  (project.descri || '').toLowerCase().includes(searchTerm.toLowerCase())
+  (project.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+  (project.resumo || '').toLowerCase().includes(searchTerm.toLowerCase())
 );
 
 
@@ -171,18 +161,13 @@ export const ProjectTable: React.FC = () => {
               {filteredProjects.map((project) => (
                 <tr key={project.id} className="hover:bg-gray-800">
                   <td className="px-6 py-4">
-                    <img src={project.image_url} alt={project.name_project} className="w-10 h-10 rounded object-cover" />
+                    <img src={project.image_url} alt={project.title} className="w-10 h-10 rounded object-cover" />
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm font-medium text-gray-100">{project.name_project}</div>
+                    <div className="text-sm font-medium text-gray-100">{project.title}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm text-gray-400 max-w-xs truncate">{project.descri}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
-                      {project.status}
-                    </span>
+                    <div className="text-sm text-gray-400 max-w-xs truncate">{project.resumo}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex items-center justify-end space-x-2">
@@ -246,18 +231,6 @@ export const ProjectTable: React.FC = () => {
               rows={3}
               value={formData.descri}
               onChange={(e) => setFormData({ ...formData, descri: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Status
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.status}
-              onChange={(e) => setFormData({ ...formData, status: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
