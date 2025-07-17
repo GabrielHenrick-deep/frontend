@@ -115,7 +115,7 @@ export function ContactPage() {
             {/* Logo */}
             <div className="flex justify-center mt-8">
               <img
-              src="http://localhost:8000/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg"
+              src={`${import.meta.env.VITE_BACKEND_URL}/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg`}
               alt="Logo GRVA"
               className="w-40 h-20 object-contain"
               />

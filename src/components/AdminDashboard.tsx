@@ -46,7 +46,7 @@ export const AdminDashboard: React.FC = () => {
             <div className="flex items-center space-x-3">
               <div className="flex items-center justify-center w-8 h-8 bg-gray-900 rounded-lg shadow">
                  <img
-                src="http://localhost:8000/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg"
+                src={`${import.meta.env.VITE_BACKEND_URL}/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg`}
                 className="h-20 w-20"
                 alt="Logo"
               />

@@ -18,10 +18,10 @@ const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
   setIsLoading(true);
   try {
     // 1. Pegar cookie CSRF (só necessário se estiver usando login via sessão — não token)
-    await axios.get("http://localhost:8000/sanctum/csrf-cookie", { withCredentials: true });
+    await axios.get(`${import.meta.env.VITE_BACKEND_URL}/sanctum/csrf-cookie`, { withCredentials: true });
 
     // 2. Login com email/senha
-    const res = await axios.post("http://localhost:8000/api/login", {
+    const res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
       email,
       password,
     });
@@ -30,7 +30,7 @@ const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     localStorage.setItem('token', token);
 
     // 3. Buscar dados do usuário autenticado
-    const userRes = await axios.get("http://localhost:8000/api/user", {
+    const userRes = await axios.get(`${import.meta.env.VITE_API_URL}/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

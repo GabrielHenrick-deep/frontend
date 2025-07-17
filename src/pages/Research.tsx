@@ -19,38 +19,38 @@ export function Research() {
           {
             id: '1',
             title: 'Interfaces Avançadas do Usuário para Operação Crítica de Sistemas',
-            imageUrl: 'http://localhost:8000/storage/areasPesquisa/lp1.png',
+            imageUrl: `${import.meta.env.VITE_BACKEND_URL}/storage/areasPesquisa/lp1.png`,
             link: '#',
           },
           {
             id: '2',
             title: 'Reabilitação e Jogos Sérios',
             
-            imageUrl: 'http://localhost:8000/storage/areasPesquisa/lp2.png',
+            imageUrl: `${import.meta.env.VITE_BACKEND_URL}/storage/areasPesquisa/lp2.png`,
             link: '#',
           },
           {
             id: '3',
             title: 'Visualização da Informação',
-            imageUrl: 'http://localhost:8000/storage/areasPesquisa/lp3.png',
+            imageUrl: `${import.meta.env.VITE_BACKEND_URL}/storage/areasPesquisa/lp3.png`,
             link: '#',
           },
           {
             id: '4',
             title: 'Ensino e Aprendizado',
-            imageUrl: 'http://localhost:8000/storage/areasPesquisa/lp4.png',
+            imageUrl: `${import.meta.env.VITE_BACKEND_URL}/storage/areasPesquisa/lp4.png`,
             link: '#',
           },
           {
             id: '5',
             title: 'Sistemas de Computação Holográfica e Medicina',
-            imageUrl: 'http://localhost:8000/storage/areasPesquisa/lp5.png',
+            imageUrl: `${import.meta.env.VITE_BACKEND_URL}/storage/areasPesquisa/lp5.png`,
             link: '#',
           },
           {
             id: '6',
             title: 'Computer-Aided Design e Building Information Modeling',
-            imageUrl: 'http://localhost:8000/storage/areasPesquisa/lp6.png',
+            imageUrl: `${import.meta.env.VITE_BACKEND_URL}/storage/areasPesquisa/lp6.png`,
             link: '#',
           },
         ];

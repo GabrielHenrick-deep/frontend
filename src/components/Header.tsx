@@ -60,7 +60,7 @@ export function Header() {
           <div className="flex justify-center">
             <Link to="/" className="flex items-center space-x-2">
               <img
-                src="http://localhost:8000/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg"
+                src={`${import.meta.env.VITE_BACKEND_URL}/storage/logo/LogoGRVA_secundaria_fundo_escuro.svg`}
                 className="h-20 w-20"
                 alt="Logo"
               />
