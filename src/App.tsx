@@ -21,7 +21,6 @@ function App() {
         <Header />
         <div className="pt-16 flex-grow">
           <Routes>
-            <Route path="/" element={<HomePage />} />
             <Route path="/members" element={<MembersPage />} />
             <Route path="/blog" element={<BlogPage />} />            
             <Route path="/projects" element={<ProjectsPage />} />
@@ -40,6 +39,7 @@ function App() {
             />
 
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>

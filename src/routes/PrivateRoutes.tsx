@@ -12,7 +12,7 @@ export const PrivateRoute = ({ element }: { element: JSX.Element }) => {
       try {
         await axios.get('/user'); // Laravel responde com usuário autenticado
         setAuthenticated(true);
-      } catch (error) {
+      } catch {
         setAuthenticated(false);
       } finally {
         setLoading(false);

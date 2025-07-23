@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { LogOut, Shield } from 'lucide-react';
+import { LogOut,  } from 'lucide-react';
 import { TabSwitcher } from './TabSwitcher';
 import { MembersTable } from './MembersTable';
 import { ProjectTable } from './ProjectTable';
@@ -10,11 +10,11 @@ import { logout } from '../api/logout';
 
 export const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('members');
-  const [projectData, setProjectsData] = useState(null);
+  // const [ setProjectsData] = useState(null);
   useEffect(() =>{
-    fetch('htpp://localhost:8000/api')
+    fetch(`${import.meta.env.VITE_API_URL}`)
     .then(reponse => reponse.json())
-    .then(data => setProjectsData(data))
+    // .then(data => setProjectsData(data))
     .catch(error => console.error('Erro:', error))
   }, []);
  
