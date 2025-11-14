@@ -19,7 +19,9 @@ O principal objetivo é funcionar como um portfólio dinâmico, atraindo novos t
 
 ## 📹 Vídeo de Demonstração
 
-[![Clique para assistir ao vídeo](./src/data/img/video-thumb.png)](https://www.linkedin.com/posts/gabriel-henrick-ribeiro-de-sousa-a235a02b9_desenvolvimentofullstack-frontend-backend-ugcPost-7383525962837291008-ZKXv)
+<a href="https://www.linkedin.com/posts/gabriel-henrick-ribeiro-de-sousa-a235a02b9_desenvolvimentofullstack-frontend-backend-ugcPost-7383525962837291008-ZKXv">
+  <img src="./src/data/img/video-thumb.png" alt="Clique para assistir ao vídeo" width="300px">
+</a>
 
 *(Clique na imagem para ver o post completo no LinkedIn)*
 
