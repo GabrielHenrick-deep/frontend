@@ -15,7 +15,7 @@ O principal objetivo é funcionar como um portfólio dinâmico, atraindo novos t
 
 | Página Principal | Seção de Projetos | Página de Contato |
 | :---: | :---: | :---: |
-| ![Página Principal](frontend/src/data/img/home.png) | ![Seção de Projetos](frontend/src/data/img/project.png) | ![Página de Contato](frontend/src/data/img/contact.png) |
+| ![Página Principal](./frontend/src/data/img/home.png) | ![Seção de Projetos](./frontend/src/data/img/project.png) | ![Página de Contato](./frontend/src/data/img/contact.png) |
 
 
 ## ✨ Funcionalidades Principais
