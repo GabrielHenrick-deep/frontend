@@ -15,8 +15,13 @@ O principal objetivo é funcionar como um portfólio dinâmico, atraindo novos t
 
 | Página Principal | Seção de Projetos | Página de Contato |
 | :---: | :---: | :---: |
-| ![Página Principal](./frontend/src/data/img/home.png) | ![Seção de Projetos](./frontend/src/data/img/project.png) | ![Página de Contato](./frontend/src/data/img/contact.png) |
+| ![Página Principal](./src/data/img/home.png) | ![Seção de Projetos](./src/data/img/project.png) | ![Página de Contato](./src/data/img/contact.png) |
 
+## 📹 Vídeo de Demonstração
+
+[![Clique para assistir ao vídeo](./src/data/img/video-thumb.png)](https://www.linkedin.com/posts/gabriel-henrick-ribeiro-de-sousa-a235a02b9_desenvolvimentofullstack-frontend-backend-ugcPost-7383525962837291008-ZKXv)
+
+*(Clique na imagem para ver o post completo no LinkedIn)*
 
 ## ✨ Funcionalidades Principais
 
