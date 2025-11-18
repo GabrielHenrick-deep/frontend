@@ -17,19 +17,12 @@ O principal objetivo é funcionar como um portfólio dinâmico, atraindo novos t
 | :---: | :---: | :---: |
 | ![Página Principal](./src/data/img/home.png) | ![Seção de Projetos](./src/data/img/project.png) | ![Página de Contato](./src/data/img/contact.png) |
 
-## 📹 Vídeo de Demonstração
-
-<a href="https://www.linkedin.com/posts/gabriel-henrick-ribeiro-de-sousa-a235a02b9_desenvolvimentofullstack-frontend-backend-ugcPost-7383525962837291008-ZKXv">
-  <img src="./src/data/img/video-thumb.png" alt="Clique para assistir ao vídeo" width="300px">
-</a>
-
-*(Clique na imagem para ver o post completo no LinkedIn)*
 
 ## ✨ Funcionalidades Principais
 
 * **Listagem de Projetos:** Uma galeria para exibir os trabalhos e pesquisas desenvolvidos pelo GRVA.
 * **Descrição de Serviços:** Apresentação das soluções e consultorias oferecidas pelo laboratório.
-* **Atração de Talentos:** Seção "Sobre Nós" e "Faça Parte" para interessados em ingressar no grupo.
+* **Membros do Grupo:** Seção como nossos membros do Grupo.
 * **Canal de Contato:** Formulário direto para contato comercial ou acadêmico.
 * **Design Responsivo:** Interface totalmente adaptável para dispositivos móveis e desktops.
 
